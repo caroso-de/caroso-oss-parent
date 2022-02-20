@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.caroso.maven.parent</groupId>
 	<artifactId>caroso-oss-parent</artifactId>
-	<version>1.0.0-alpha2-SNAPSHOT</version>
+	<version>1.0.0-alpha2</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<packaging>pom</packaging>
 
@@ -26,7 +26,7 @@
 		<connection>scm:git:https://github.com/caroso-de/caroso-oss-parent.git</connection>
 		<developerConnection>scm:git:https://github.com/caroso-de/caroso-oss-parent.git</developerConnection>
 		<url>https://github.com/caroso-de/caroso-maven-parent</url>
-		<tag>main</tag>
+		<tag>caroso-oss-parent-1.0.0-alpha2</tag>
 	</scm>
 
 	<properties>
