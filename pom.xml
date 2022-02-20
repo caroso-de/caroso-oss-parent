@@ -5,6 +5,10 @@
 	<version>1.0.0-alpha4-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<packaging>pom</packaging>
+	
+	<description>parent to my oss projects on maven central</description>
+	
+	<url>https://github.com/caroso-de/caroso-oss-parent</url>
 
 	<developers>
 		<developer>
