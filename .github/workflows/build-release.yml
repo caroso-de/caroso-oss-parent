@@ -29,7 +29,7 @@ jobs:
           git config user.name "GitHub Actions"
           
       - name: Prepare Release
-        run: mvn -B release:prepare
+        run: mvn -B release:prepare -DautoVersionSubmodules=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
