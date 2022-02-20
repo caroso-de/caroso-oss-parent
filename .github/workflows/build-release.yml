@@ -5,8 +5,6 @@
 name: Release
 
 on:
-#  push: 
-#    branches: [ release ]
   workflow_dispatch:
         
 
@@ -16,23 +14,44 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
-      - name: Setup Java JDK
+        
+      - name: Setup For Github
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
           java-version: 8
+          cache: maven
           server-id: github
+          
       - name: Configure Git user
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-      - name: Publish JAR
-        run: mvn -B release:prepare release:clean
+          
+      - name: Prepare Release
+        run: mvn -B release:prepare
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Rollback
+        if: failure()
+        run: mvn -B release:rollback
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+        
+          
+      - name: Setup For Central
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 8
+          cache: maven
+          server-id: ossrh
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}    
+          
+      - name: release to central
+        run: mvn release:perform --file pom.xml --batch-mode -P distribution
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
