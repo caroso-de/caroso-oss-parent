@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.caroso.maven.parent</groupId>
 	<artifactId>caroso-oss-parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0-alpha1-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<packaging>pom</packaging>
 
@@ -40,6 +40,7 @@
 		<version.source-plugin>3.2.0</version.source-plugin>
 		<version.gpg-plugin>3.0.1</version.gpg-plugin>
 		<version.compiler-plugin>3.8.1</version.compiler-plugin>
+		<version.release-plugin>3.0.0-M5</version.release-plugin>
 		<version.surefire-plugin>2.22.2</version.surefire-plugin>
 		<version.nexus-staging-plugin>1.6.8</version.nexus-staging-plugin>
 
@@ -99,6 +100,10 @@
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${version.surefire-plugin}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${version.release-plugin}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
